@@ -67,7 +67,7 @@ img {
 </div>
 
 
-<p><a href="Notes:First" class="uri">Notes:First</a> of all, because my html file is too big to shown in the github website, I write some code at the botton in this Rmd to save the pictures. I will also upload these pictures for viewing and grading. Sorry for the inconvenience and thanks a lot!</p>
+<p><em><a href="Notes:First" class="uri">Notes:First</a> of all, because my html file is too big to shown in the github website,</em> <em>I upload these pictures for viewing and grading.</em> <em>Sorry for the inconvenience and thanks a lot!</em></p>
 <p><strong>Loading and preprocessing the data</strong></p>
 <pre class="r"><code>data &lt;- read.csv(&quot;activity.csv&quot;)
 head(data)</code></pre>
@@ -83,7 +83,8 @@ head(data)</code></pre>
 ##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
 ##  $ date    : Factor w/ 61 levels &quot;2012-10-01&quot;,&quot;2012-10-02&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...</code></pre>
-<p><strong>What is mean total number of steps taken per day?</strong> 1.Calculate the total number of steps taken per day</p>
+<p><strong>What is mean total number of steps taken per day?</strong></p>
+<p>1.Calculate the total number of steps taken per day</p>
 <pre class="r"><code>tapply(data$steps,data$date,sum)</code></pre>
 <pre><code>## 2012-10-01 2012-10-02 2012-10-03 2012-10-04 2012-10-05 2012-10-06 
 ##         NA        126      11352      12116      13294      15420 
@@ -116,6 +117,7 @@ hist(stepsum)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <pre class="r"><code>median(stepsum[!is.na(stepsum)])</code></pre>
 <pre><code>## [1] 10765</code></pre>
+<p><em>Mean: 9354</em> <em>Median:10395</em></p>
 <p><strong>What is the average daily activity pattern?</strong></p>
 <p>1.Make a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)</p>
 <pre class="r"><code>sub &lt;- data[complete.cases(data$steps),]
@@ -136,11 +138,13 @@ plot(combine$interval,combine$meansteps,type=&quot;l&quot;,xlab=&quot;the 5-minu
 subcombine &lt;- combine[combine$meansteps==maxvalue,]
 subcombine$interval</code></pre>
 <pre><code>## [1] 835</code></pre>
+<p>The interval that contains max steps is <em>835</em></p>
 <p><strong>Imputing missing values</strong> 1.Calculate and report the total number of missing values in the dataset</p>
 <pre class="r"><code>length(data$steps[is.na(data$steps)])</code></pre>
 <pre><code>## [1] 2304</code></pre>
 <p>2.Devise a strategy for filling in all of the missing values in the dataset. I will use the mean of that interval to fill out the NAs</p>
 <pre class="r"><code>sub &lt;- data[complete.cases(data$steps),]</code></pre>
+<p>There are <em>2304</em> NAs</p>
 <p>3.then write a function to fill out the NAs</p>
 <pre class="r"><code>data$interval &lt;- as.numeric(data$interval)
 for(i in 1:17568){
@@ -156,7 +160,7 @@ head(data)</code></pre>
 ## 4 0.1509434 2012-10-01       15
 ## 5 0.0754717 2012-10-01       20
 ## 6 2.0943396 2012-10-01       25</code></pre>
-<p>See? Here is the new dataset!</p>
+<p><em>Replace NAs with mean of the interval</em></p>
 <p>4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day.</p>
 <pre class="r"><code>newstepsum &lt;- tapply(data$steps,data$date,sum)
 hist(newstepsum)</code></pre>

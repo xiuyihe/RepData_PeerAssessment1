@@ -5,10 +5,9 @@ date: "August 8, 2015"
 output: html_document
 ---
 
-Notes:First of all, because my html file is too big to shown in the github website,
-I write some code at the botton in this Rmd to save the pictures.
-I will also upload these pictures for viewing and grading.
-Sorry for the inconvenience and thanks a lot!
+*Notes:First of all, because my html file is too big to shown in the github website,*
+*I upload these pictures for viewing and grading.*
+*Sorry for the inconvenience and thanks a lot!*
 
 **Loading and preprocessing the data**
 
@@ -20,6 +19,7 @@ str(data)
 
 
 **What is mean total number of steps taken per day?**
+
 1.Calculate the total number of steps taken per day
 ```{r echo=TRUE}
 tapply(data$steps,data$date,sum)
@@ -36,6 +36,8 @@ hist(stepsum)
 mean(stepsum[!is.na(stepsum)])
 median(stepsum[!is.na(stepsum)])
 ```
+*Mean: 9354*
+*Median:10395*
 
 **What is the average daily activity pattern?**
 
@@ -63,6 +65,7 @@ subcombine <- combine[combine$meansteps==maxvalue,]
 subcombine$interval
 ```
 
+The interval that contains max steps is *835*
 
 **Imputing missing values**
 1.Calculate and report the total number of missing values in the dataset
@@ -75,6 +78,9 @@ I will use the mean of that interval to fill out the NAs
 ```{r echo=TRUE}
 sub <- data[complete.cases(data$steps),]
 ```
+
+There are *2304* NAs
+
 3.then write a function to fill out the NAs
 ```{r echo=TRUE}
 data$interval <- as.numeric(data$interval)
@@ -85,7 +91,8 @@ for(i in 1:17568){
 }
 head(data)
 ```
-See? Here is the new dataset!
+
+*Replace NAs with mean of the interval*
 
 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day.
 
