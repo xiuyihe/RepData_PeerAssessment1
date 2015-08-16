@@ -112,6 +112,8 @@ data1$weekday <- as.factor(data1$weekday)
 the plot
 
 ```{r echo=TRUE}
+
+#process the data set
 subweekday <- data1[data1$weekday == "weekday",]
 subweekend <- data1[data1$weekday == "weekend",]
 pweekday <- aggregate(subweekday$steps,by=list(subweekday$interval),FUN=mean)
@@ -122,8 +124,9 @@ colnames(pweekend) <- c("interval","meansteps")
 pweekend$fweekday <- "weekend"
 data2 <- rbind(pweekday,pweekend)
 
-library(lattice)
 
+#plot the picture
+library(lattice)
 xyplot(meansteps~interval|fweekday,data2,type="l",layout=c(1,2))
 ```
 
